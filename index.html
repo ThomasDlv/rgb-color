@@ -6,9 +6,43 @@
 <title>Rgb Colors</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
-</head>
 <body>
-    <div id="color">rgb (255,255,255)</div>
+    <div id="color" class="color-Copy">rgb (255,255,255)</div>
+    <button class="bouton">Copier</button>
 </body>
 <script src="app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    (() => {
+        const bouton = document.querySelector('.bouton');
+        bouton.addEventListener('click', () => {
+            const text = document.querySelector('.color-Copy');
+            const ranges = document.createRange();
+
+            ranges.selectNode(text)
+            window.getSelection().addRange(ranges);
+            try{
+                if (document.execCommand('copy')){
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Copier',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            } catch (err){
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'Vous avez pas copier',
+                    showConfirmButton: false,
+                    timer: 1500,
+                })
+            }
+
+            window.getSelection().removeAllRanges();
+        });
+    })();
+</script>
 </html>

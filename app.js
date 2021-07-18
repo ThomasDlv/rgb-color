@@ -1,4 +1,3 @@
-
 setInterval(changeBG, 2000)
 
 function changeBG() {
